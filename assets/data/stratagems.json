@@ -1,0 +1,833 @@
+{
+  "HD2-ABR": [
+    "DOWN",
+    "UP",
+    "UP",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-AC": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-AMR": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "UP",
+    "DOWN"
+  ],
+  "HD2-APM": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-AS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "UP",
+    "LEFT",
+    "UP"
+  ],
+  "HD2-AT": [
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "LEFT",
+    "LEFT"
+  ],
+  "HD2-ATE": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "RIGHT",
+    "RIGHT"
+  ],
+  "HD2-ATM": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "UP"
+  ],
+  "HD2-Aquifer Drill": [
+    "LEFT",
+    "LEFT",
+    "LEFT",
+    "UP",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-BAS": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-BELTGREN": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "LEFT",
+    "UP",
+    "UP"
+  ],
+  "HD2-BMDC4": [
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "UP",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-BREHAM": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "LEFT",
+    "UP"
+  ],
+  "HD2-BS": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "LEFT"
+  ],
+  "HD2-CRE": [
+    "DOWN",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
+  "HD2-Cargo Container": [
+    "UP",
+    "UP",
+    "DOWN",
+    "DOWN",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-DEE": [
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-DEFO": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-DS": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "UP",
+    "UP"
+  ],
+  "HD2-Dark Fluid Vessel": [
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
+  "HD2-E110": [
+    "UP",
+    "RIGHT",
+    "UP",
+    "LEFT"
+  ],
+  "HD2-E500": [
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-EA": [
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-EAT": [
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-EAT411": [
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "UP",
+    "DOWN"
+  ],
+  "HD2-ECB": [
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-EGA": [
+    "UP",
+    "RIGHT",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-EMS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-ENA": [
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-EPO": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-ERA": [
+    "UP",
+    "UP",
+    "LEFT",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-ESR": [
+    "UP",
+    "RIGHT",
+    "RIGHT"
+  ],
+  "HD2-ESS": [
+    "UP",
+    "RIGHT",
+    "UP",
+    "DOWN"
+  ],
+  "HD2-EX51": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "RIGHT",
+    "LEFT",
+    "UP"
+  ],
+  "HD2-EX52": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-EXN": [
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "UP",
+    "LEFT"
+  ],
+  "HD2-EXO": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "LEFT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-EXO2": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "LEFT",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-FRV": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-FS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
+  "HD2-FT": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-GD": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "UP",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-GDDB": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "UP",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-GDHD": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "UP",
+    "LEFT",
+    "LEFT"
+  ],
+  "HD2-GDK9": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "UP",
+    "RIGHT",
+    "LEFT"
+  ],
+  "HD2-GDR": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "UP",
+    "RIGHT",
+    "RIGHT"
+  ],
+  "HD2-GL": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "LEFT",
+    "DOWN"
+  ],
+  "HD2-GMS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "LEFT"
+  ],
+  "HD2-GRB": [
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-GS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "LEFT"
+  ],
+  "HD2-HMG": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-HMGT": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "RIGHT",
+    "LEFT"
+  ],
+  "HD2-HP": [
+    "DOWN",
+    "UP",
+    "UP",
+    "DOWN",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-Hellbomb": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-HiveBreaker Drill": [
+    "LEFT",
+    "UP",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-IFRV": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
+  "HD2-IM": [
+    "DOWN",
+    "LEFT",
+    "LEFT",
+    "DOWN"
+  ],
+  "HD2-JP": [
+    "DOWN",
+    "UP",
+    "UP",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-LC": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "LEFT"
+  ],
+  "HD2-LSE": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-MAXG": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
+  "HD2-MD8": [
+    "DOWN",
+    "LEFT",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-MEL": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "LEFT",
+    "LEFT",
+    "DOWN"
+  ],
+  "HD2-MG": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-MGS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-MGX": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "LEFT"
+  ],
+  "HD2-MLS": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-MS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-O120": [
+    "RIGHT",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-O380": [
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "UP",
+    "LEFT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-OAS": [
+    "RIGHT",
+    "RIGHT",
+    "RIGHT"
+  ],
+  "HD2-OES": [
+    "RIGHT",
+    "RIGHT",
+    "LEFT",
+    "DOWN"
+  ],
+  "HD2-OGB": [
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "UP",
+    "UP"
+  ],
+  "HD2-OGS": [
+    "RIGHT",
+    "RIGHT",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-OL": [
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-ONB": [
+    "RIGHT",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-OPS": [
+    "RIGHT",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-ORS": [
+    "RIGHT",
+    "UP",
+    "DOWN",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-OSS": [
+    "RIGHT",
+    "RIGHT",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-OTF": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-OWB": [
+    "RIGHT",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "RIGHT",
+    "DOWN"
+  ],
+  "HD2-Orbital Illumination Flare": [
+    "RIGHT",
+    "RIGHT",
+    "LEFT",
+    "LEFT"
+  ],
+  "HD2-PHB": [
+    "DOWN",
+    "RIGHT",
+    "UP",
+    "UP",
+    "UP"
+  ],
+  "HD2-Prospecting Drill": [
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-QC": [
+    "DOWN",
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-RG": [
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-RR": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "RIGHT",
+    "LEFT"
+  ],
+  "HD2-RS": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "RIGHT",
+    "LEFT"
+  ],
+  "HD2-Reinforcement": [
+    "UP",
+    "DOWN",
+    "RIGHT",
+    "LEFT",
+    "UP"
+  ],
+  "HD2-ReinforcementPods": [
+    "LEFT",
+    "RIGHT",
+    "UP",
+    "UP",
+    "UP"
+  ],
+  "HD2-Resupply": [
+    "DOWN",
+    "DOWN",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-SEAF-ALT": [
+    "RIGHT",
+    "UP",
+    "UP",
+    "DOWN"
+  ],
+  "HD2-SEF": [
+    "DOWN",
+    "UP",
+    "DOWN",
+    "UP"
+  ],
+  "HD2-SFRV": [
+    "LEFT",
+    "DOWN",
+    "LEFT",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-SG": [
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-SGP": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-SLO": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-SOS": [
+    "UP",
+    "DOWN",
+    "RIGHT",
+    "UP"
+  ],
+  "HD2-SP": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "UP",
+    "DOWN"
+  ],
+  "HD2-SPE": [
+    "DOWN",
+    "DOWN",
+    "UP",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-SPR": [
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "UP",
+    "RIGHT"
+  ],
+  "HD2-SSSD Delivery": [
+    "DOWN",
+    "DOWN",
+    "DOWN",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
+  "HD2-STA": [
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
+    "UP",
+    "LEFT"
+  ],
+  "HD2-STE": [
+    "DOWN",
+    "LEFT",
+    "UP",
+    "DOWN",
+    "LEFT"
+  ],
+  "HD2-Seismic Probe": [
+    "UP",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "DOWN"
+  ],
+  "HD2-Super Destroyer": [
+    "UP",
+    "UP",
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-TT": [
+    "DOWN",
+    "UP",
+    "RIGHT",
+    "UP",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-Tactical Video Camera": [
+    "RIGHT",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "LEFT",
+    "LEFT",
+    "UP"
+  ],
+  "HD2-Tectonic Drill": [
+    "UP",
+    "DOWN",
+    "UP",
+    "DOWN",
+    "UP",
+    "DOWN"
+  ],
+  "HD2-Upload": [
+    "LEFT",
+    "RIGHT",
+    "UP",
+    "UP",
+    "UP"
+  ],
+  "HD2-WAS": [
+    "DOWN",
+    "DOWN",
+    "UP",
+    "DOWN",
+    "RIGHT"
+  ],
+  "HD2-WP": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "RIGHT"
+  ]
+}

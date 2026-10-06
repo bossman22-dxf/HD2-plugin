@@ -1,0 +1,148 @@
+HELLDIVERS 2 Plugin - New Stratagem Workflow
+============================================
+
+Use this when Arrowhead releases a new stratagem and you want to update this
+StreamController plugin while keeping the HD2-* icon/action style.
+
+Project directory:
+/home/ty/.var/app/com.core447.StreamController/data/plugins/net_jslay_helldivers_2
+
+Styled icon source directory:
+/home/ty/Pictures/Icons
+
+Important notes
+---------------
+1. Run update commands from the project virtual environment, not the system
+   Python and not from inside the StreamController Flatpak runtime.
+
+2. StreamController itself only needs finished PNG files in assets/icons.
+   It does not need cairosvg during normal plugin use.
+
+3. cairosvg is only needed by the update scripts when the generator must fall
+   back to rendering SVG files. Most icons should come from your styled PNGs in
+   /home/ty/Pictures/Icons.
+
+4. The icon generator intentionally ignores these local icon subdirectories for
+   stratagem styling:
+   - Factions
+   - Folder Icons
+   - Keys
+
+5. Canonical action/icon IDs in this fork should use the HD2-* naming style.
+   Example: Eagle Gas Airstrike is HD2-EGA.
+
+One-time setup / dependency refresh
+-----------------------------------
+From the project directory:
+
+  cd /home/ty/.var/app/com.core447.StreamController/data/plugins/net_jslay_helldivers_2
+  source .venv/bin/activate
+  pip install -r update/requirements.txt
+
+If you suspect the venv is not active, use the explicit interpreter instead:
+
+  .venv/bin/python -m update validate
+
+New stratagem update process
+----------------------------
+1. Go to the project directory and activate the venv:
+
+  cd /home/ty/.var/app/com.core447.StreamController/data/plugins/net_jslay_helldivers_2
+  source .venv/bin/activate
+
+2. Discover new wiki/SVG entries:
+
+  python -m update discover -v
+
+3. Add the new stratagem to update/config.py.
+
+   Find STRATAGEM_MAPPINGS and add an entry using the old readable source key
+   style first. Example:
+
+     "EagleGasAirstrike": {
+         "wiki": "Eagle Gas Airstrike",
+         "svg": "Eagle Gas Airstrike",
+         "name": "Eagle Gas Airstrike",
+     },
+
+   Then add its canonical HD2-* ID to HD2_KEY_OVERRIDES in the same file:
+
+     "EagleGasAirstrike": "HD2-EGA",
+
+   Use your preferred abbreviation for the HD2-* value.
+
+4. Add or create the styled PNG icon.
+
+   Put the finished 144x144 PNG somewhere under /home/ty/Pictures/Icons in the
+   correct stratagem category, not under Factions, Folder Icons, or Keys.
+
+   The PNG filename stem should match the HD2-* ID from HD2_KEY_OVERRIDES.
+   Example:
+
+     /home/ty/Pictures/Icons/Eagle/HD2-EGA.png
+
+5. Regenerate stratagem sequences from the wiki:
+
+  python -m update stratagems -v
+
+   This updates:
+
+     assets/data/stratagems.json
+
+   The scraper maps the wiki name to the canonical HD2-* ID using config.py.
+
+6. Regenerate locale labels:
+
+  python -m update locales
+
+   This updates:
+
+     locales/en_US.json
+
+7. Generate/copy icons:
+
+  python -m update icons
+
+   The generator first copies matching styled PNGs from /home/ty/Pictures/Icons.
+   If no local PNG exists for a stratagem, it falls back to SVG rendering when
+   cairosvg and Cairo are available in the venv environment.
+
+8. Validate the result:
+
+  python -m update validate
+
+   You want no missing icon warnings for canonical stratagem keys. Extra icon
+   warnings usually mean old files or navigation/organization icons are present
+   in assets/icons.
+
+9. Optional: generate test pages:
+
+  python -m update pages
+
+10. Restart StreamController if it was running, then add/test the new action on
+    your Stream Deck.
+
+Quick all-in-one command sequence
+---------------------------------
+After editing update/config.py and adding the styled PNG:
+
+  cd /home/ty/.var/app/com.core447.StreamController/data/plugins/net_jslay_helldivers_2
+  source .venv/bin/activate
+  python -m update stratagems -v
+  python -m update locales
+  python -m update icons
+  python -m update validate
+
+Flatpak / CachyOS Cairo note
+----------------------------
+If cairosvg fails with an error like:
+
+  OSError: dlopen() failed to load a library: cairo
+
+that means the environment running cairosvg cannot access the Cairo system
+library. On CachyOS with StreamController installed as a Flatpak, host packages
+alone may not satisfy libraries inside the Flatpak sandbox.
+
+For this plugin, avoid running update scripts inside the Flatpak sandbox. Run
+updates from this project venv in a normal terminal. The StreamController app
+only needs the generated PNGs at runtime.
