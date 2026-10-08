@@ -1,3 +1,6 @@
+This is a custom fork from (Jslay88's plugin)[https://github.com/jslay88/streamcontroller_helldivers_2]
+Changed the icons and added more instructions 
+
 # HELLDIVERS 2 StreamController Plugin
 
 Assumes the following:
@@ -145,6 +148,6 @@ If you prefer to add stratagems manually:
 
 ### TODO
 
-* Add "custom button" option where a user can define the stratagem itself
-* Package the icon set
+~~* Add "custom button" option where a user can define the stratagem itself~~ Done
+* Package the icon set 
 * Test all the buttons
