@@ -1,8 +1,8 @@
 {
-  "version": "2.4.0",
+  "version": "1.0.0",
   "thumbnail": "store/thumbnail.png",
-  "id": "net_jslay_helldivers_2",
-  "name": "HELLDIVERS 2",
+  "id": "bossman22-dxf_HD2",
+  "name": "HD2",
   "descriptions": {
     "en_US": "Stratagem keys for HELLDIVERS 2"
   },
