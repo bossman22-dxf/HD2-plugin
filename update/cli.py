@@ -17,9 +17,8 @@ Commands:
     validate        Validate configuration
     
 Workflow:
-    1. Run `discover` to find new stratagems
-    2. Add suggested mappings to update/config.py
-    3. Run `generate-all` to create all assets
+    1. Run `discover` to find and add missing mappings to update/config.py
+    2. Run `generate-all` to create all assets
 """
 
 import argparse
@@ -33,6 +32,7 @@ from .config import (
     LOCALE_EN_US,
     STRATAGEMS_JSON,
     STRATAGEM_MAPPINGS,
+    HD2_KEY_OVERRIDES,
     WIKI_TO_KEY_MAPPINGS,
     SVG_TO_KEY_MAPPINGS,
 )
