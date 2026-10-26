@@ -30,7 +30,7 @@ Access settings via **Settings → Plugins → HELLDIVERS 2 → ⚙️**
 ### Project Structure
 
 ```
-net_jslay_helldivers_2/
+bossman22-dxf_HD2/
 ├── main.py                    # Plugin entry point
 ├── manifest.json              # Plugin metadata
 ├── VERSION                    # Version number
@@ -53,16 +53,16 @@ The `update/` module automates asset generation. It scrapes stratagem data from 
 
 #### Setup
 
-Create a virtual environment and install dependencies:
+On this CachyOS/Flatpak installation, the plugin is at `$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2`. Run maintenance commands in a normal host terminal, not inside the Flatpak sandbox. The commands below use Fish shell.
 
 ```bash
-cd /path/to/net_jslay_helldivers_2
+cd "$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2"
 
 # Create virtual environment
 python -m venv .venv
 
 # Activate it
-source .venv/bin/activate  # Linux/macOS
+source .venv/bin/activate.fish  # Fish shell
 # .venv\Scripts\activate   # Windows
 
 # Install dependencies
@@ -78,7 +78,7 @@ When new stratagems are added to the game:
 **1. Discover new stratagems**
 
 ```bash
-cd /path/to/net_jslay_helldivers_2
+cd "$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2"
 source .venv/bin/activate
 python -m update discover
 ```
