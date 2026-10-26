@@ -53,49 +53,16 @@ New stratagem update process
 
   python -m update discover -v
 
-3. Add the stratagem to update/config.py.
+3. Discovery automatically adds missing wiki/SVG mappings to update/config.py
+   and assigns each new mapping an HD2-* ID. Existing IDs are preserved.
+   Review any reported name matches, then generate all assets:
 
-   Add an entry to STRATAGEM_MAPPINGS using the exact wiki and SVG names:
+  python -m update generate-all
 
-     "EagleGasAirstrike": {
-         "wiki": "Eagle Gas Airstrike",
-         "svg": "Eagle Gas Airstrike",
-         "name": "Eagle Gas Airstrike",
-     },
+   The icon generator creates stylized PNGs from available SVGs, or uses local
+   styled PNGs from $HOME/Pictures/Icons when available.
 
-   Add its canonical ID to HD2_KEY_OVERRIDES in the same file:
-
-     "EagleGasAirstrike": "HD2-EGA",
-
-   Choose a short, consistent HD2-* identifier.
-
-4. Add the finished 144x144 styled PNG under $HOME/Pictures/Icons in the
-   correct category. Do not put it under Factions, Folder Icons, or Keys.
-   The filename stem must match the HD2-* ID:
-
-     $HOME/Pictures/Icons/Eagle/HD2-EGA.png
-
-5. Regenerate stratagem sequences from the wiki:
-
-  python -m update stratagems -v
-
-   This updates assets/data/stratagems.json.
-
-6. Regenerate locale labels:
-
-  python -m update locales
-
-   This updates locales/en_US.json.
-
-7. Generate/copy icons:
-
-  python -m update icons
-
-   Matching styled PNGs are copied from $HOME/Pictures/Icons. If no local PNG
-   exists, the script falls back to SVG rendering when cairosvg and Cairo are
-   available in the host environment.
-
-8. Validate:
+4. Validate:
 
   python -m update validate
 
@@ -111,13 +78,12 @@ New stratagem update process
 
 Quick command sequence
 ----------------------
-After editing update/config.py and adding the styled PNG:
+After discovery automatically updates config.py:
 
   cd "$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2"
   source .venv/bin/activate.fish
-  python -m update stratagems -v
-  python -m update locales
-  python -m update icons
+  python -m update discover
+  python -m update generate-all
   python -m update validate
 
 Flatpak / CachyOS Cairo note
