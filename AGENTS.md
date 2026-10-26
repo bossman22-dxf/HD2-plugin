@@ -62,6 +62,10 @@ update/
 └── __main__.py     # Enables `python -m update`
 ```
 
+## Local environment and paths
+
+On the target CachyOS installation, the plugin lives at `$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2`. Use `$HOME` or `~` instead of hard-coded `/home/<user>` paths. The user runs Fish, so venv activation is `source .venv/bin/activate.fish`. Run the update scripts in a normal host terminal, not inside the StreamController Flatpak sandbox.
+
 ## Common Tasks
 
 ### Adding New Stratagems
@@ -146,7 +150,7 @@ Settings are managed through StreamController's plugin settings system:
 1. `self.has_plugin_settings = True` enables the settings button
 2. `get_settings_area()` returns an `Adw.PreferencesGroup` with the settings UI
 3. `get_settings()` / `set_settings()` from `PluginBase` handle persistence
-4. Settings are stored in `data/settings/plugins/net_jslay_helldivers_2/settings.json`
+4. Settings are stored in `data/plugins/bossman22-dxf_HD2/`
 
 ### Key Constants in `main.py`
 
@@ -211,7 +215,7 @@ SVG names often differ from wiki names (e.g., "Machine Gun" vs "MG-43 Machine Gu
 A standalone validator tool captures keyboard input and matches it to stratagems:
 
 ```bash
-cd /path/to/net_jslay_helldivers_2
+cd $HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2
 python test_stratagems.py
 ```
 
@@ -271,7 +275,7 @@ Each page contains:
 First-time setup:
 
 ```bash
-cd /path/to/net_jslay_helldivers_2
+cd $HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2
 python -m venv .venv
 source .venv/bin/activate
 pip install -r update/requirements.txt
@@ -280,7 +284,7 @@ pip install -r update/requirements.txt
 Running commands:
 
 ```bash
-cd /path/to/net_jslay_helldivers_2
+cd $HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2
 source .venv/bin/activate
 python -m update [command]
 ```
