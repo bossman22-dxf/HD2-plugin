@@ -49,37 +49,33 @@ New stratagem update process
   cd "$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2"
   source .venv/bin/activate.fish
 
-2. Discover new wiki/SVG entries:
+2. Run discovery. It automatically adds missing wiki/SVG mappings to
+   update/config.py and assigns each new entry an HD2-* ID, while preserving
+   existing IDs:
 
   python -m update discover -v
 
-3. Discovery automatically adds missing wiki/SVG mappings to update/config.py
-   and assigns each new mapping an HD2-* ID. Existing IDs are preserved.
-   Review any reported name matches, then generate all assets:
+3. Generate the updated stratagem data, locale labels, and stylized icons:
 
   python -m update generate-all
 
-   The icon generator creates stylized PNGs from available SVGs, or uses local
-   styled PNGs from $HOME/Pictures/Icons when available.
+   The icon generator uses matching local styled PNGs when available and
+   otherwise renders the available SVGs into PNGs. Discovery may report
+   genuinely missing source icons or names that need review.
 
-4. Validate:
+4. Validate the generated files:
 
   python -m update validate
 
-   Resolve missing icon warnings for canonical stratagem keys. Extra icon
-   warnings may indicate stale files or navigation/organization icons.
-
-9. Optional: generate test pages:
+5. Optional: generate test pages:
 
   python -m update pages
 
-10. Restart StreamController if it was running, then add and test the action
-    on the Stream Deck.
+6. Restart StreamController if it was running, then add and test the action
+   on the Stream Deck.
 
 Quick command sequence
 ----------------------
-After discovery automatically updates config.py:
-
   cd "$HOME/.var/app/com.core447.StreamController/data/plugins/bossman22-dxf_HD2"
   source .venv/bin/activate.fish
   python -m update discover
