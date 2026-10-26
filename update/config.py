@@ -25,7 +25,7 @@ SVG_REPO_EXTRACTED_NAME = "Helldivers-2-Stratagems-icons-svg-master"
 DEFAULT_ICON_SIZE = 144
 DEFAULT_ICON_SCALE = 0.70
 DEFAULT_ICON_COLOR = "#c9b269"  # Gold fallback
-LOCAL_ICON_SOURCE_DIR = Path("/home/ty/Pictures/Icons")
+LOCAL_ICON_SOURCE_DIR = Path.home() / "Pictures" / "Icons"
 LOCAL_ICON_EXCLUDED_DIRS = {"Factions", "Folder Icons", "Keys"}
 
 # Color mappings: SVG colors -> desired PNG colors (more saturated)
