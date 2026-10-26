@@ -324,120 +324,161 @@ def cmd_validate(args):
 
 
 def cmd_discover(args):
-    """
-    Discover new stratagems from wiki and SVG sources.
-    
-    Compares what's in STRATAGEM_MAPPINGS against:
-    - Wiki: stratagems scraped from wiki.gg
-    - SVGs: stratagem icons from the GitHub repository
-    
-    Shows what needs to be added to the mappings.
-    """
+    """Discover and automatically add missing wiki/SVG mappings to config.py."""
     from .download import SVGDownloadContext, find_all_svgs
     from .scraper import scrape_stratagems_raw
+    import difflib
     import re
-    
+
+    config_path = Path(__file__).with_name("config.py")
+
+    def clean_name(value):
+        return re.sub(r"[^a-z0-9]", "", value.casefold())
+
+    def suggest_key(name):
+        clean = re.sub(r'"([^"]+)"', r"\1", name)
+        words = re.findall(r"[A-Za-z0-9]+", clean)
+        key = "".join(word[:1].upper() + word[1:] for word in words) or "NewStratagem"
+        if key[0].isdigit():
+            key = "Stratagem" + key
+        return key
+
+    def hd2_id(name):
+        slug = re.sub(r"[^A-Za-z0-9]+", " ", name).strip()
+        return "HD2-" + slug
+
     print("=" * 60)
     print("Discover New Stratagems")
     print("=" * 60)
-    
-    # Current mappings - get the wiki and svg names we've defined
-    mapped_wiki_names = set(WIKI_TO_KEY_MAPPINGS.keys())
-    mapped_svg_names = set(SVG_TO_KEY_MAPPINGS.keys())
-    mapped_keys = set(STRATAGEM_MAPPINGS.keys())
-    
-    # Scrape wiki - get raw names
-    print("\n📡 Scraping wiki.gg for stratagems...")
-    wiki_data = scrape_stratagems_raw()  # Returns {wiki_name: arrows}
-    wiki_names = set(wiki_data.keys())
-    
-    # Download and scan SVGs
-    print("\n📥 Downloading SVG repository...")
+
+    wiki_data = scrape_stratagems_raw() or {}
+    wiki_names = set(wiki_data)
     svg_names = set()
     try:
         with SVGDownloadContext() as svg_dir:
-            svgs_by_category = find_all_svgs(svg_dir)
-            for category, svg_list in svgs_by_category.items():
-                for svg_path, svg_name in svg_list:  # It's a tuple (Path, str)
-                    svg_names.add(svg_name)
-    except Exception as e:
-        print(f"  ⚠️  Could not download SVGs: {e}")
-    
-    # Find differences - compare wiki names to our mapped wiki names
-    new_on_wiki = wiki_names - mapped_wiki_names
-    new_svgs = svg_names - mapped_svg_names
-    
-    # Check for mappings with no wiki entry
-    wiki_missing = mapped_wiki_names - wiki_names
-    
-    # Check for mappings with no SVG
-    svg_missing = mapped_svg_names - svg_names
-    
-    # Generate suggested keys for new entries
-    def suggest_key(name: str) -> str:
-        """Generate a PascalCase key from a name."""
-        clean = re.sub(r'"([^"]+)"', r'\1', name)  # Remove quotes
-        clean = clean.replace("-", " ").replace(".", " ").replace("'", "")
-        words = clean.split()
-        return "".join(word.capitalize() for word in words)
-    
-    # Print results
-    print("\n" + "=" * 60)
-    print("DISCOVERY RESULTS")
-    print("=" * 60)
-    
-    if new_on_wiki:
-        print(f"\n🆕 NEW ON WIKI ({len(new_on_wiki)}):")
-        print("   Add these to STRATAGEM_MAPPINGS in config.py:\n")
-        for name in sorted(new_on_wiki):
-            key = suggest_key(name)
-            sequence = wiki_data.get(name, [])
-            seq_str = ", ".join(f'"{d}"' for d in sequence)
-            print(f'    "{key}": {{"wiki": "{name}", "svg": "{name}", "name": "{name}"}},')
-            if args.verbose:
-                print(f'        # Sequence: [{seq_str}]')
-    else:
-        print("\n✅ No new stratagems on wiki")
-    
-    if new_svgs:
-        print(f"\n🎨 NEW SVG ICONS ({len(new_svgs)}):")
-        print("   These SVGs don't have mappings:\n")
-        for name in sorted(new_svgs):
-            key = suggest_key(name)
-            print(f'    "{key}": {{"wiki": "{name}", "svg": "{name}", "name": "{name}"}},')
-    else:
-        print("\n✅ No unmapped SVG icons")
-    
-    if args.verbose:
-        if wiki_missing:
-            print(f"\n⚠️  WIKI ENTRIES NOT FOUND ({len(wiki_missing)}):")
-            print("   These mappings have wiki names that weren't found on wiki:")
-            for name in sorted(wiki_missing):
-                key = WIKI_TO_KEY_MAPPINGS.get(name, "?")
-                print(f"    - {name} (key: {key})")
-        
-        if svg_missing:
-            print(f"\n⚠️  SVG FILES NOT FOUND ({len(svg_missing)}):")
-            print("   These mappings have SVG names that weren't found:")
-            for name in sorted(svg_missing):
-                key = SVG_TO_KEY_MAPPINGS.get(name, "?")
-                print(f"    - {name} (key: {key})")
-    
-    # Summary
-    print("\n" + "-" * 60)
-    print("SUMMARY")
-    print("-" * 60)
-    print(f"  Mapped stratagems: {len(mapped_keys)}")
-    print(f"  Wiki stratagems:   {len(wiki_names)} ({len(new_on_wiki)} new)")
-    print(f"  SVG icons:         {len(svg_names)} ({len(new_svgs)} unmapped)")
-    
-    if new_on_wiki or new_svgs:
-        print("\n💡 TIP: Copy the suggested mappings above to update/config.py")
-        print("   then run `python -m update generate-all` to generate assets.")
-        return 1
-    
-    return 0
+            if svg_dir is not None:
+                for category, svg_list in find_all_svgs(svg_dir).items():
+                    for svg_path, svg_name in svg_list:
+                        svg_names.add(svg_name)
+            else:
+                print("⚠️  Could not download SVGs; continuing with wiki data only.")
+    except Exception as exc:
+        print(f"⚠️  Could not download SVGs: {exc}")
 
+    # Re-read the source so the command can safely update config.py itself.
+    source = config_path.read_text(encoding="utf-8")
+    known_wiki = set(WIKI_TO_KEY_MAPPINGS)
+    known_svg = set(SVG_TO_KEY_MAPPINGS)
+    new_wiki = sorted(wiki_names - known_wiki)
+    new_svg = sorted(svg_names - known_svg)
+
+    # Pair new wiki entries with similarly named SVGs, without creating duplicate
+    # entries when the two sources use slightly different names.
+    pairs = []
+    unused_svg = set(new_svg)
+    for wiki_name in new_wiki:
+        if not unused_svg:
+            pairs.append((wiki_name, ""))
+            continue
+        ranked = sorted(
+            ((difflib.SequenceMatcher(None, clean_name(wiki_name), clean_name(svg)).ratio(), svg)
+             for svg in unused_svg),
+            reverse=True,
+        )
+        score, best_svg = ranked[0]
+        if clean_name(wiki_name) == clean_name(best_svg) or score >= 0.78:
+            pairs.append((wiki_name, best_svg))
+            unused_svg.remove(best_svg)
+        else:
+            pairs.append((wiki_name, ""))
+
+    # Also include SVG-only discoveries. These remain useful icon mappings even
+    # when the wiki has not published a corresponding stratagem entry yet.
+    entries = []
+    used_keys = set(STRATAGEM_MAPPINGS)
+    used_ids = set(HD2_KEY_OVERRIDES.values())
+    for wiki_name, svg_name in pairs:
+        display = wiki_name
+        base_key = suggest_key(wiki_name)
+        key = base_key
+        suffix = 2
+        while key in used_keys:
+            key = f"{base_key}{suffix}"
+            suffix += 1
+        used_keys.add(key)
+        canonical = hd2_id(display)
+        while canonical in used_ids:
+            canonical = f"{hd2_id(display)} {suffix}"
+            suffix += 1
+        used_ids.add(canonical)
+        entries.append((key, wiki_name, svg_name, display, canonical))
+
+    for svg_name in sorted(unused_svg):
+        base_key = suggest_key(svg_name)
+        key = base_key
+        suffix = 2
+        while key in used_keys:
+            key = f"{base_key}{suffix}"
+            suffix += 1
+        used_keys.add(key)
+        canonical = hd2_id(svg_name)
+        while canonical in used_ids:
+            canonical = f"{hd2_id(svg_name)} {suffix}"
+            suffix += 1
+        used_ids.add(canonical)
+        entries.append((key, "", svg_name, svg_name, canonical))
+
+    if not entries:
+        print("✅ config.py already contains all discovered wiki/SVG mappings.")
+        return 0
+
+    mapping_marker = "\n}\n\n\n# Canonical HD2 icon/action IDs."
+    override_marker = "\n}\n\n\ndef _apply_hd2_key_overrides"
+    if mapping_marker not in source or override_marker not in source:
+        print("❌ Could not safely locate mapping dictionaries in config.py; no changes made.")
+        return 1
+
+    mapping_lines = []
+    override_lines = []
+    for key, wiki_name, svg_name, display, canonical in entries:
+        fields = []
+        if wiki_name:
+            fields.append(f'"wiki": {wiki_name!r}')
+        if svg_name:
+            fields.append(f'"svg": {svg_name!r}')
+        fields.append(f'"name": {display!r}')
+        mapping_lines.append(f"    {key!r}: {{{', '.join(fields)}}},")
+        override_lines.append(f"    {key!r}: {canonical!r},")
+
+    source = source.replace(
+        mapping_marker,
+        "\n" + "\n".join(mapping_lines) + mapping_marker,
+        1,
+    )
+    source = source.replace(
+        override_marker,
+        "\n" + "\n".join(override_lines) + override_marker,
+        1,
+    )
+
+    # Validate syntax before writing, so a bad discovery cannot corrupt config.py.
+    try:
+        compile(source, str(config_path), "exec")
+    except SyntaxError as exc:
+        print(f"❌ Generated config.py did not pass syntax validation: {exc}")
+        return 1
+
+    config_path.write_text(source, encoding="utf-8")
+    print(f"✅ Added {len(entries)} missing mapping(s) to {config_path.name}:")
+    for key, wiki_name, svg_name, display, canonical in entries:
+        sources = []
+        if wiki_name:
+            sources.append(f"wiki={wiki_name!r}")
+        if svg_name:
+            sources.append(f"svg={svg_name!r}")
+        print(f"  {canonical} ({', '.join(sources)})")
+    print("\nNext run: python -m update generate-all")
+    return 0
 
 def main():
     parser = argparse.ArgumentParser(
