@@ -395,7 +395,7 @@ def cmd_discover(args):
     # Also include SVG-only discoveries. These remain useful icon mappings even
     # when the wiki has not published a corresponding stratagem entry yet.
     entries = []
-    used_keys = set(STRATAGEM_MAPPINGS)
+    used_keys = set(STRATAGEM_MAPPINGS) | set(HD2_KEY_OVERRIDES)
     used_ids = set(HD2_KEY_OVERRIDES.values())
     for wiki_name, svg_name in pairs:
         display = wiki_name
