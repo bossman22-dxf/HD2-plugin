@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
+  <title>Backpack weapon identifier</title>
+  <g stroke="#17212a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+    <path fill="#c9b269" d="M111 24c0-2.4 1.9-4.3 4.3-4.3h1.4c2.4 0 4.3 1.9 4.3 4.3v2.2h-10z"/>
+    <path fill="#f0c628" d="M109.2 27.5h13.6c1.1 0 2 .9 2 2v8.7c0 1.4-1.1 2.5-2.5 2.5h-12.6c-1.4 0-2.5-1.1-2.5-2.5v-8.7c0-1.1.9-2 2-2z"/>
+    <path fill="none" d="M108 31h-2.2v6.2h2.2M124 31h2.2v6.2H124"/>
+    <path fill="#c9b269" d="M112 30.5h8v5.7h-8z"/>
+    <path fill="none" d="M112 42.1v-1.4m8 1.4v-1.4"/>
+  </g>
+</svg>
