@@ -21,6 +21,14 @@
     "UP",
     "DOWN"
   ],
+  "HD2-AMW 20 Apex": [
+    "DOWN",
+    "LEFT",
+    "LEFT",
+    "UP",
+    "DOWN",
+    "LEFT"
+  ],
   "HD2-APM": [
     "DOWN",
     "LEFT",
@@ -56,6 +64,14 @@
     "LEFT",
     "UP",
     "UP"
+  ],
+  "HD2-Activate E 711 Extraction Drill": [
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "LEFT",
+    "DOWN",
+    "DOWN"
   ],
   "HD2-Aquifer Drill": [
     "LEFT",
@@ -282,6 +298,17 @@
     "DOWN",
     "UP"
   ],
+  "HD2-Eagle Fly By": [
+    "UP",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "UP",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
   "HD2-FRV": [
     "LEFT",
     "DOWN",
@@ -435,6 +462,13 @@
     "UP",
     "DOWN",
     "UP"
+  ],
+  "HD2-LAS 44 Nova": [
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "DOWN"
   ],
   "HD2-LC": [
     "DOWN",
@@ -598,6 +632,17 @@
     "RIGHT",
     "DOWN"
   ],
+  "HD2-Orbital Confetti": [
+    "RIGHT",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "UP",
+    "DOWN",
+    "DOWN",
+    "UP",
+    "UP"
+  ],
   "HD2-Orbital Illumination Flare": [
     "RIGHT",
     "RIGHT",
@@ -610,6 +655,15 @@
     "UP",
     "UP",
     "UP"
+  ],
+  "HD2-Portable Comms Relay": [
+    "UP",
+    "UP",
+    "DOWN",
+    "DOWN",
+    "LEFT",
+    "LEFT",
+    "DOWN"
   ],
   "HD2-Prospecting Drill": [
     "DOWN",
@@ -745,8 +799,6 @@
     "DOWN",
     "DOWN",
     "DOWN",
-    "DOWN",
-    "DOWN",
     "UP",
     "UP"
   ],
@@ -780,6 +832,17 @@
     "DOWN",
     "LEFT",
     "RIGHT",
+    "LEFT",
+    "RIGHT"
+  ],
+  "HD2-TD 110 Maelstrom": [
+    "LEFT",
+    "DOWN",
+    "RIGHT",
+    "DOWN",
+    "LEFT",
+    "DOWN",
+    "UP",
     "LEFT",
     "RIGHT"
   ],

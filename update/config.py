@@ -591,6 +591,14 @@ STRATAGEM_MAPPINGS = {
         "svg": "40-K Meltagun",
         "name": "40-K Meltagun",
     },
+    'AMW20Apex': {"wiki": 'AMW-20 Apex', "svg": 'AMW-20 Apex', "name": 'AMW-20 Apex'},
+    'ActivateE711ExtractionDrill': {"wiki": 'Activate E-711 Extraction Drill', "name": 'Activate E-711 Extraction Drill'},
+    'EagleFlyBy': {"wiki": 'Eagle Fly By', "name": 'Eagle Fly By'},
+    'LAS44Nova': {"wiki": 'LAS-44 Nova', "svg": 'LAS-44 Nova', "name": 'LAS-44 Nova'},
+    'OrbitalConfetti': {"wiki": 'Orbital Confetti', "name": 'Orbital Confetti'},
+    'PortableCommsRelay': {"wiki": 'Portable Comms Relay', "name": 'Portable Comms Relay'},
+    'TD110Maelstrom': {"wiki": 'TD-110 Maelstrom', "svg": 'TD-110 Maelstrom', "name": 'TD-110 Maelstrom'},
+    'EagleGasStrike': {"svg": 'Eagle Gas Strike', "name": 'Eagle Gas Strike'},
 }
 
 
@@ -711,6 +719,14 @@ HD2_KEY_OVERRIDES = {
     "UploadData": "HD2-Upload",
     "WASPLauncher": "HD2-WAS",
     "WarpPack": "HD2-WP",
+    'AMW20Apex': 'HD2-AMW 20 Apex',
+    'ActivateE711ExtractionDrill': 'HD2-Activate E 711 Extraction Drill',
+    'EagleFlyBy': 'HD2-Eagle Fly By',
+    'LAS44Nova': 'HD2-LAS 44 Nova',
+    'OrbitalConfetti': 'HD2-Orbital Confetti',
+    'PortableCommsRelay': 'HD2-Portable Comms Relay',
+    'TD110Maelstrom': 'HD2-TD 110 Maelstrom',
+    'EagleGasStrike': 'HD2-Eagle Gas Strike',
 }
 
 
