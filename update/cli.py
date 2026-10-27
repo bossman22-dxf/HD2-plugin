@@ -408,20 +408,9 @@ def cmd_discover(args):
         used_ids.add(canonical)
         entries.append((key, wiki_name, svg_name, display, canonical))
 
-    for svg_name in sorted(unused_svg):
-        base_key = suggest_key(svg_name)
-        key = base_key
-        suffix = 2
-        while key in used_keys:
-            key = f"{base_key}{suffix}"
-            suffix += 1
-        used_keys.add(key)
-        canonical = hd2_id(svg_name)
-        while canonical in used_ids:
-            canonical = f"{hd2_id(svg_name)} {suffix}"
-            suffix += 1
-        used_ids.add(canonical)
-        entries.append((key, "", svg_name, svg_name, canonical))
+    # Do not create mappings for SVG-only names: an icon alone does not prove
+    # that a playable stratagem/sequence exists. These should be added only when
+    # the wiki also reports the stratagem.
 
     if not entries:
         print("✅ config.py already contains all discovered wiki/SVG mappings.")
