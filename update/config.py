@@ -598,7 +598,6 @@ STRATAGEM_MAPPINGS = {
     'OrbitalConfetti': {"wiki": 'Orbital Confetti', "name": 'Orbital Confetti'},
     'PortableCommsRelay': {"wiki": 'Portable Comms Relay', "name": 'Portable Comms Relay'},
     'TD110Maelstrom': {"wiki": 'TD-110 Maelstrom', "svg": 'TD-110 Maelstrom', "name": 'TD-110 Maelstrom'},
-    'EagleGasStrike': {"svg": 'Eagle Gas Strike', "name": 'Eagle Gas Strike'},
 }
 
 
@@ -726,7 +725,6 @@ HD2_KEY_OVERRIDES = {
     'OrbitalConfetti': 'HD2-Orbital Confetti',
     'PortableCommsRelay': 'HD2-Portable Comms Relay',
     'TD110Maelstrom': 'HD2-TD 110 Maelstrom',
-    'EagleGasStrike': 'HD2-Eagle Gas Strike',
 }
 
 
