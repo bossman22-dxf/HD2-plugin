@@ -1,88 +1,48 @@
-"""
-Weapon icon post-processing helpers.
-
-Some support weapon icons use small top-right identifiers that are easier to
-maintain as reusable overlays than as one-off hand edits:
-
-- backpack identifier, using HD2-WAS/HD2-SPE style
-- expendable identifier, using HD2-SLO/HD2-EAT style
-
-This module patches already-generated PNGs in-place. It extracts only the
-identifier pixels from a reference icon by comparing that reference against the
-blue blank background, then pastes those pixels into the same position on each
-configured target icon.
-"""
-
+"""Apply version-controlled SVG identifiers to generated support-weapon icons."""
 from __future__ import annotations
 
+import argparse
+import io
 from pathlib import Path
 
 try:
-    from PIL import Image, ImageChops
-except ImportError:  # pragma: no cover - handled at runtime
+    import cairosvg
+except ImportError:  # pragma: no cover - checked at runtime
+    cairosvg = None
+
+try:
+    from PIL import Image
+except ImportError:  # pragma: no cover - checked at runtime
     Image = None
-    ImageChops = None
 
-from .config import ICONS_DIR
+from .config import ICONS_DIR, SCRIPTS_DIR
 
+IDENTIFIER_DIR = SCRIPTS_DIR / "weapon-identifiers"
 
-# Marker crop boxes are inclusive-left/top, exclusive-right/bottom.
-# These were measured from the current HD2-* icon style at 144x144.
-IDENTIFIER_SOURCES = {
-    "backpack": {
-        "reference": "HD2-WAS",
-        "blank": "Blank/HD2-Blank-Blue",
-        "box": (108, 19, 123, 41),
-    },
-    "expendable": {
-        "reference": "HD2-EAT",
-        "blank": "Blank/HD2-Blank-Blue",
-        "box": (97, 18, 126, 49),
-    },
+# Target icon filename -> reusable master SVG identifier.
+# These are deliberately maintained here rather than by editing generated PNGs.
+WEAPON_IDENTIFIER_MAPPINGS: dict[str, str] = {
+    "HD2-AC": "backpack",
+    "HD2-ABR": "backpack",
+    "HD2-RR": "backpack",
+    "HD2-SPE": "backpack",
+    "HD2-WAS": "backpack",
+    "HD2-EAT": "expendable",
+    "HD2-MLS": "expendable",
 }
 
 
-# Manual overlay map. Add entries here when a generated weapon icon needs one of
-# the identifiers above. The reference icons themselves already include these
-# markers in your local styled PNG source, so this map starts empty.
-#
-# Examples:
-# WEAPON_IDENTIFIER_MAPPINGS = {
-#     "HD2-MY-BACKPACK-WEAPON": "backpack",
-#     "HD2-MY-EXPENDABLE-WEAPON": "expendable",
-# }
-WEAPON_IDENTIFIER_MAPPINGS: dict[str, str] = {}
-
-
-def _png_path(icon_dir: Path, stem: str) -> Path:
-    return icon_dir / f"{stem}.png"
-
-
-def _load_overlay(icon_dir: Path, identifier: str) -> tuple[Image.Image, tuple[int, int, int, int]]:
-    """Extract identifier overlay and alpha mask from its reference icon."""
-    if Image is None or ImageChops is None:
-        raise RuntimeError("Pillow is required for weapon identifier overlays")
-
-    source = IDENTIFIER_SOURCES[identifier]
-    box = source["box"]
-    reference_path = _png_path(icon_dir, source["reference"])
-    blank_path = _png_path(icon_dir, source["blank"])
-
-    if not reference_path.exists():
-        raise FileNotFoundError(f"Missing identifier reference icon: {reference_path}")
-    if not blank_path.exists():
-        raise FileNotFoundError(f"Missing identifier blank icon: {blank_path}")
-
-    reference_crop = Image.open(reference_path).convert("RGBA").crop(box)
-    blank_crop = Image.open(blank_path).convert("RGBA").crop(box)
-
-    # Use the difference from the blank as the paste mask. This keeps the marker
-    # shape while leaving the target icon/background untouched elsewhere.
-    diff = ImageChops.difference(reference_crop, blank_crop).convert("L")
-    mask = diff.point(lambda value: 255 if value else 0)
-    overlay = Image.new("RGBA", reference_crop.size, (0, 0, 0, 0))
-    overlay.paste(reference_crop, (0, 0), mask)
-    return overlay, box
+def _render_identifier(name: str, size: tuple[int, int]) -> Image.Image:
+    """Render a transparent master SVG to an RGBA overlay."""
+    if cairosvg is None or Image is None:
+        raise RuntimeError("CairoSVG and Pillow are required (see update/requirements.txt)")
+    svg_path = IDENTIFIER_DIR / f"{name}.svg"
+    if not svg_path.is_file():
+        raise FileNotFoundError(f"Missing master weapon identifier SVG: {svg_path}")
+    png_bytes = cairosvg.svg2png(
+        bytestring=svg_path.read_bytes(), output_width=size[0], output_height=size[1]
+    )
+    return Image.open(io.BytesIO(png_bytes)).convert("RGBA")
 
 
 def apply_weapon_identifier_overlays(
@@ -91,62 +51,57 @@ def apply_weapon_identifier_overlays(
     dry_run: bool = False,
     verbose: bool = False,
 ) -> tuple[int, int]:
-    """
-    Apply configured top-right weapon identifiers to existing PNG icons.
-
-    Args:
-        icon_dir: Directory containing generated PNG icons.
-        mappings: Optional target->identifier mapping. Defaults to
-            WEAPON_IDENTIFIER_MAPPINGS.
-        dry_run: If True, report actions without modifying files.
-        verbose: Print each applied overlay.
-
-    Returns:
-        Tuple of (updated_count, error_count).
-    """
+    """Apply the configured SVG identifier to each generated PNG in-place."""
     mappings = mappings if mappings is not None else WEAPON_IDENTIFIER_MAPPINGS
     if not mappings:
+        print("No weapon identifier mappings configured.")
         return 0, 0
-
-    if Image is None or ImageChops is None:
-        print("Pillow not found; cannot apply weapon identifier overlays.")
+    if cairosvg is None or Image is None:
+        print("ERROR: install CairoSVG and Pillow from update/requirements.txt")
         return 0, len(mappings)
 
-    overlay_cache: dict[str, tuple[Image.Image, tuple[int, int, int, int]]] = {}
-    updated = 0
-    errors = 0
-
+    updated = errors = 0
+    cache: dict[str, Image.Image] = {}
     for target, identifier in mappings.items():
-        if identifier not in IDENTIFIER_SOURCES:
-            print(f"  ERROR: {target}: unknown weapon identifier '{identifier}'")
+        if identifier not in {"backpack", "expendable"}:
+            print(f"ERROR: {target}: unknown identifier '{identifier}'")
             errors += 1
             continue
-
-        target_path = _png_path(icon_dir, target)
-        if not target_path.exists():
-            print(f"  ERROR: {target}: target icon not found: {target_path}")
+        target_path = icon_dir / f"{target}.png"
+        if not target_path.is_file():
+            print(f"ERROR: {target}: generated icon not found: {target_path}")
             errors += 1
             continue
-
         if dry_run:
-            if verbose:
-                print(f"  {target}.png  <-  {identifier} weapon identifier")
+            print(f"Would apply {identifier} SVG to {target_path.name}")
             updated += 1
             continue
-
         try:
-            if identifier not in overlay_cache:
-                overlay_cache[identifier] = _load_overlay(icon_dir, identifier)
-
-            overlay, box = overlay_cache[identifier]
-            icon = Image.open(target_path).convert("RGBA")
-            icon.alpha_composite(overlay, dest=(box[0], box[1]))
+            with Image.open(target_path) as source:
+                icon = source.convert("RGBA")
+            if identifier not in cache:
+                cache[identifier] = _render_identifier(identifier, icon.size)
+            icon.alpha_composite(cache[identifier])
             icon.convert("RGB").save(target_path, "PNG")
             updated += 1
             if verbose:
-                print(f"  {target}.png  <-  {identifier} weapon identifier")
+                print(f"Applied {identifier} SVG to {target_path.name}")
         except Exception as exc:
-            print(f"  ERROR: {target}: failed to apply {identifier} identifier: {exc}")
+            print(f"ERROR: {target}: could not apply {identifier} identifier: {exc}")
             errors += 1
 
+    print(f"Weapon identifiers: {updated} applied, {errors} error(s).")
     return updated, errors
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dry-run", action="store_true", help="Report actions without changing PNGs")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Print each applied identifier")
+    args = parser.parse_args()
+    _, errors = apply_weapon_identifier_overlays(dry_run=args.dry_run, verbose=args.verbose)
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
