@@ -30,7 +30,22 @@ WEAPON_IDENTIFIER_MAPPINGS: dict[str, str] = {
     "HD2-ABR": "backpack",
     "HD2-RR": "backpack",
     "HD2-SPE": "backpack",
+    "HD2-BELTGREN": "backpack",
+    "HD2-CRE": "backpack",
+    "HD2-MAXG": "backpack",
+    "HD2-AMW 20 Apex": "backpack",
+    "HD2-AMW 20 Apex": "backpack",
+    "HD2-AMW 20 Apex": "backpack",
+    "HD2-AMW 20 Apex": "backpack",
+    "HD2-EAT": "expendable",
+    "HD2-EAT411": "expendable",
+    "HD2-EXN": "expendable",
+    "HD2-MGX": "expendable",
     "HD2-MLS": "expendable",
+    "HD2-SLO": "expendable",
+    "HD2-MLS": "expendable",
+    "HD2-MLS": "expendable",
+    
 }
 
 
