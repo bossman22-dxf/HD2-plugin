@@ -46,6 +46,11 @@ jobs:
           . .venv/bin/activate
           python -m update generate-all --skip-pages -v
 
+      - name: Apply weapon identifier overlays
+        run: |
+          . .venv/bin/activate
+          python -m update.weapons -v
+
       - name: Validate generated assets
         run: |
           . .venv/bin/activate
@@ -55,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add update/config.py assets/data/stratagems.json assets/icons locales
+          git add update/config.py update/weapon-identifiers assets/data/stratagems.json assets/icons locales
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
           else
