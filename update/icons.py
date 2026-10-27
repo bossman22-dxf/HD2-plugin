@@ -450,7 +450,7 @@ def svg_to_png_with_borders(
 
     _prepared_color, used_default = extract_accent_color(svg_content)
     if used_default:
-        print(f"  WARNING: {svg_path.name}: No valid fill color found, using default {DEFAULT_ICON_COLOR}")
+        print(f"  INFO: {svg_path.name}: no explicit fill color; using fallback {DEFAULT_ICON_COLOR}")
     blank_key = choose_blank_key(original_color, had_corners)
     was_mapped = blank_key != "gold" or had_corners
     
