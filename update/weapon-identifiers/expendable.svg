@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
-  <title>Expendable weapon identifier</title>
-  <g stroke="#17212a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
-    <path fill="#f0c628" d="M111.5 18.5l4.4 4.1 5.8-.4.4 5.8 4.1 4.4-4.1 4.4-.4 5.8-5.8-.4-4.4 4.1-4.4-4.1-5.8.4-.4-5.8-4.1-4.4 4.1-4.4.4-5.8 5.8.4z"/>
-    <path fill="#c9b269" d="M112.1 25.2h6.8l-1.2 8.1h-4.4z"/>
-    <path fill="#f0c628" d="M112.3 35h6.4v3.2h-6.4z"/>
-    <path fill="none" stroke-width="1.6" d="M114.4 23.2v-2.1m2.1 2.1v-2.1"/>
-  </g>
-</svg>
