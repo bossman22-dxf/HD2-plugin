@@ -273,29 +273,24 @@ def cmd_validate(args):
             if key not in DISPLAY_NAMES:
                 warnings.append(f"Missing display name for: {key}")
         
-        # Check for legacy keys that have sequences
-        legacy_with_seq = set(LEGACY_KEYS) & set(stratagems.keys())
-        legacy_missing_seq = set(LEGACY_KEYS) - set(stratagems.keys())
-        
-        for key in legacy_missing_seq:
-            warnings.append(f"Legacy key missing sequence: {key}")
-        
-        # Check for SVG mappings that don't have sequences
+        # Check for SVG mappings that don't have sequences.
         for svg_name, key in SVG_TO_KEY_MAPPINGS.items():
             if key not in stratagems:
                 warnings.append(f"SVG '{svg_name}' maps to key '{key}' which has no sequence")
-        
-        # Check for existing icons
+
+        # Only validate icons for mappings with a configured SVG source. Many other
+        # PNGs in assets/icons are UI, faction, navigation, or legacy artwork, and
+        # some new wiki entries do not have an SVG available yet.
         if ICONS_DIR.exists():
+            from .config import STRATAGEM_MAPPINGS
+
             existing_icons = {p.stem for p in ICONS_DIR.glob("*.png")}
-            missing_icons = set(stratagems.keys()) - existing_icons
-            extra_icons = existing_icons - set(stratagems.keys()) - {"hero_on", "hero_off", "helldivers2_logo", "_stepforward", "_stepbakcward"}
-            
-            for key in missing_icons:
-                warnings.append(f"Missing icon: {key}.png")
-            
-            for key in extra_icons:
-                warnings.append(f"Extra icon (no stratagem): {key}.png")
+            expected_icons = {
+                key for key, data in STRATAGEM_MAPPINGS.items()
+                if data.get("svg") and key in stratagems
+            }
+            for key in sorted(expected_icons - existing_icons):
+                warnings.append(f"Missing icon for configured SVG mapping: {key}.png")
     
     # Print results
     print("Validation Results")
