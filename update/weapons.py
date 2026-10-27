@@ -25,6 +25,7 @@ IDENTIFIER_SOURCES: dict[str, tuple[str, tuple[int, int]]] = {
 }
 
 # Icons that do not already include the relevant marker.
+# Use PNG name
 WEAPON_IDENTIFIER_MAPPINGS: dict[str, str] = {
     "HD2-AC": "backpack",
     "HD2-ABR": "backpack",
@@ -34,17 +35,17 @@ WEAPON_IDENTIFIER_MAPPINGS: dict[str, str] = {
     "HD2-CRE": "backpack",
     "HD2-MAXG": "backpack",
     "HD2-AMW 20 Apex": "backpack",
-    "HD2-AMW 20 Apex": "backpack",
-    "HD2-AMW 20 Apex": "backpack",
-    "HD2-AMW 20 Apex": "backpack",
+#    "HD2-": "backpack",
+#    "HD2-": "backpack",
+#    "HD2-": "backpack",
     "HD2-EAT": "expendable",
     "HD2-EAT411": "expendable",
     "HD2-EXN": "expendable",
     "HD2-MGX": "expendable",
     "HD2-MLS": "expendable",
     "HD2-SLO": "expendable",
-    "HD2-MLS": "expendable",
-    "HD2-MLS": "expendable",
+#    "HD2-": "expendable",
+#    "HD2-": "expendable",
     
 }
 
